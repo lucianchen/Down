@@ -59,6 +59,9 @@ open class DownView: WKWebView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool{
+        return false
+    }
     // MARK: - API
     
     /**
@@ -93,7 +96,6 @@ open class DownView: WKWebView {
 // MARK: - Private API
 
 private extension DownView {
-
     func loadHTMLView(_ markdownString: String) throws {
         let htmlString = try markdownString.toHTML()
         let pageHTMLString = try htmlFromTemplate(htmlString)
