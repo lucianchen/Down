@@ -41,6 +41,19 @@ open class DownView: WKWebView {
         if openLinksInBrowser || didLoadSuccessfully != nil { navigationDelegate = self }
         try loadHTMLView(markdownString)
     }
+    
+    public init(frame: CGRect, markdownString: String, config: WKWebViewConfiguration? = nil) throws {
+        let openLinksInBrowser = true
+        
+        let classBundle = Bundle(for: DownView.self)
+        let url = classBundle.url(forResource: "DownView", withExtension: "bundle")!
+        self.bundle = Bundle(url: url)!
+        
+        super.init(frame: frame, configuration: (config != nil) ? config! : WKWebViewConfiguration())
+        
+        if openLinksInBrowser || didLoadSuccessfully != nil { navigationDelegate = self }
+        try loadHTMLView(markdownString)
+    }
 
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
